@@ -1,5 +1,5 @@
 ﻿@page "/"
-@namespace BugTracker.BlazorComponents
+@namespace BugTracker.BlazorServer.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
@@ -9,14 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BugTracker</title>
     <base href="~/" />
-    @*<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />*@
-    @*<link href="css/site.css" rel="stylesheet" />*@
-    <link rel="stylesheet" href="_content/BugTracker.BlazorComponents/css/bootstrap/bootstrap.min.css" />
-    <link href="_content/BugTracker.BlazorComponents/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+
     <link href="BugTracker.BlazorServer.styles.css" rel="stylesheet" />
 </head>
 <body>
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <component type="typeof(BugTracker.BlazorComponents.App)" render-mode="ServerPrerendered" />
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
