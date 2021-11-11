@@ -7,7 +7,16 @@
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/en-us/aspnet/" target="_blank">About</a>
+            <AuthorizeView>
+                <Authorized>
+                    Welcome, @Username
+                    <br />
+                    <a href="logout?redirectUri=/">Logout</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="login?redirectUri=/">Login</a>
+                </NotAuthorized>
+            </AuthorizeView>    
         </div>
 
         <div class="content px-4">
@@ -15,3 +24,24 @@
         </div>
     </div>
 </div>
+
+@code {
+     private string Username = "";
+
+     [CascadingParameter]
+     private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+     protected override async Task OnInitializedAsync()
+     {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+
+        Username = user.Claims
+                    .Where(c => c.Type.Equals("name"))
+                    .Select(c => c.Value)
+                    .FirstOrDefault() ?? string.Empty;
+
+
+        await base.OnInitializedAsync();
+     }
+}
